@@ -1,3 +1,15 @@
+body {
+    background-color: rgb(145, 21, 21)
+}
+
+#collection {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .card {
     margin: 1rem 0;
     display: flex;
@@ -5,10 +17,81 @@
     align-content: center;
     text-align: center;
     max-width: 19em;
-    background-color: var(--theme-color-two);
+    background-color: rgb(62, 62, 247);
     padding: 2em;
     overflow: clip;
     box-shadow: var(--theme-gradient-two);
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; 
+    white-space: normal;
+    border: 7px solid white;
+    border-radius: 15px;
+      
 }
+
+.article-title-container {
+    position: absolute;
+    top: 8px;
+    color: white;
+    left: 0;
+    max-width: 11em;
+    color: rgba(255, 255, 255, 0.94);
+    font: bold 1.5em Helvetica, Sans-Serif;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.5em;
+    overflow: hidden;
+    transition: 1s;
+}
+
+.article-title-container h4 {
+    margin: 0;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.article-title-container:hover {
+    letter-spacing: 10px;
+}
+
+.card .img-container {
+    position: relative;
+    padding: 0;
+    width: 18em;
+    height: 18em;
+}
+
+.card img {
+    object-fit: cover;
+    width: 18em;
+    height: 18em;
+}
+
+.card img:hover {
+    z-index: 10000;
+    position: relative;
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
