@@ -1,0 +1,14 @@
+.card {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    max-width: 19em;
+    background-color: var(--theme-color-two);
+    padding: 2em;
+    overflow: clip;
+    box-shadow: var(--theme-gradient-two);
+    margin-left: auto;
+    margin-right: auto;
+}
