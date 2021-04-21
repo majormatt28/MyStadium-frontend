@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(145, 21, 21)
+    background-color: gold
 }
 
 #collection {
@@ -17,15 +17,15 @@ body {
     align-content: center;
     text-align: center;
     max-width: 19em;
-    background-color: rgb(62, 62, 247);
+    background-color:rgb(44, 2, 44);
     padding: 2em;
     overflow: clip;
     box-shadow: var(--theme-gradient-two);
     margin-left: auto;
     margin-right: auto; 
     white-space: normal;
-    border: 7px solid white;
-    border-radius: 15px;
+    border: 4px solid white;
+    border-radius: 50px;
       
 }
 
@@ -63,8 +63,8 @@ body {
 
 .card img {
     object-fit: cover;
-    width: 18em;
-    height: 18em;
+    width: 10em;
+    height: 9em;
 }
 
 .card img:hover {
@@ -72,7 +72,32 @@ body {
     position: relative;
 }
 
- 
+ #stadium-collection {
+     width: 400%;
+     overflow-x: auto;
+     display: flex;
+     
+ }
+
+
+
+ h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    color: white
+    
+}
+
+img.detail-image  {
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+}
 
 
 
@@ -95,3 +120,197 @@ body {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.transition, p, ul li i:before, ul li i:after {
+  transition: all 0.25s ease-in-out;
+}
+.images ul li img {
+	width: 400px;
+	height: 266px;
+}
+.images ul li {
+	display: inline-block;
+}
+.flipIn, h1, ul li {
+  animation: flipdown 0.5s ease both;
+}
+
+.no-select, h2 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  perspective: 900;
+  overflow-y: scroll;
+  background-color: orange;
+  font-family: "Titillium Web", sans-serif;
+  color: rgba(48, 69, 92, 0.8);
+}
+
+body {
+  min-height: 0;
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  margin: -5px 0;
+  transform: translate(-50%, 0);
+
+  background-color: orange;
+  max-width: 450px;
+  padding: 30px;
+}
+@media (max-width: 550px) {
+  body {
+    box-sizing: border-box;
+    transform: translate(0, 0);
+    max-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    left: 0;
+  }
+}
+
+h1, h2 {
+  color: #fff;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: 3px;
+  font-weight: 100;
+}
+
+h2 {
+  font-size: 26px;
+  line-height: 34px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  display: block;
+  background-color:transparent;
+  margin: 0;
+  cursor: pointer;
+}
+
+p {
+  color: #fff;
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  max-height: 800px;
+  opacity: 1;
+  transform: translate(0, 0);
+  margin-top: 14px;
+  z-index: 2;
+}
+
+ul {
+  list-style: none;
+  perspective: 900;
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  padding-bottom: 4px;
+  padding-top: 18px;
+  border-top: 1px dotted orange ;
+}
+ul li:nth-of-type(1) {
+  animation-delay: 0.5s;
+}
+ul li:nth-of-type(2) {
+  animation-delay: 0.75s;
+}
+ul li:nth-of-type(3) {
+  animation-delay: 1s;
+}
+ul li:last-of-type {
+  padding-bottom: 0;
+}
+ul li i {
+  position: absolute;
+  transform: translate(-6px, 0);
+  margin-top: 16px;
+  right: 0;
+}
+ul li i:before, ul li i:after {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  width: 3px;
+  height: 9px;
+}
+ul li i:before {
+  transform: translate(-2px, 0) rotate(45deg);
+}
+ul li i:after {
+  transform: translate(2px, 0) rotate(-45deg);
+}
+
+
+
+@keyframes flipdown {
+  0% {
+    opacity: 0;
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+  }
+  5% {
+    opacity: 1;
+  }
+  80% {
+    transform: rotateX(8deg);
+  }
+  83% {
+    transform: rotateX(6deg);
+  }
+  92% {
+    transform: rotateX(-3deg);
+  }
+  100% {
+    transform-origin: top center;
+    transform: rotateX(0deg);
+  }
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(77, 7, 77)
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: orange;
+}
