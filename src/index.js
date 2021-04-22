@@ -3,6 +3,7 @@ const stadiumCollection = document.querySelector("#stadium-collection")
 const formModal = document.querySelector(".modal-content")
 const buttonGroup = document.querySelector(".btn-group")
 let userLogin 
+let currentStadium
 let getOurRating
 const openEls = document.querySelectorAll("[data-open]");
 const closeEls = document.querySelectorAll("[data-close]");
@@ -46,6 +47,7 @@ renderAllStadiums()
 stadiumCollection.addEventListener("click", (event) => {
 
     if (event.target.className === "card")  {
+    currentStadium = event.target.dataset.id
    getOneStadium(event.target.dataset.id)
  }
 })
@@ -85,6 +87,8 @@ stadiumCollection.addEventListener("click", (event) => {
     showUser.textContent = stadiumInfoObj.users[0].username
 
     stadiumCollection.dataset.id = stadiumInfoObj.id
+
+
 }
 
 // rendering a user
@@ -287,7 +291,8 @@ formModal.addEventListener("submit", (event) => {
                 // console.log(userLogin)
                 // userArr.forLoop(userObj => {
                     for(let i = 0; i < userArr.length; i++){
-                        if (userArr[i].username === userName){
+                        if (userArr[i].username == userName){
+                            console.log(userArr[i].username)
                             userLogin = userArr[i]
                             // grabs HMSTRS and changes it to username
                             const userNameTag = document.querySelector('.username')
@@ -307,7 +312,8 @@ formModal.addEventListener("submit", (event) => {
             buttonGroup.style.display = "none"
         })
     }
-})
+    
+}) 
 
 // New User Login
 
@@ -330,17 +336,19 @@ stadiumRating.addEventListener('submit', (event) => {
     event.preventDefault()
     const newRating = event.target.rating.value
     const newComment = event.target.comment.value
-
+    console.log(newComment)
+    console.log(userLogin)
     fetch (`http://localhost:3000/reviews/${event.target.dataset.id}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json"
         },
-        body: JSON.stringify({rating: newRating, comment: newComment})
+        // change stadium to currentStadium.id
+        body: JSON.stringify({rating: newRating, comment: newComment, user: userLogin.id, stadium: currentStadium}) 
     })
         .then(resp => resp.json())
         .then(data => {
-
+            console.log(data)
         })
 })
