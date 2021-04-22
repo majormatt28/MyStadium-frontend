@@ -336,8 +336,8 @@ stadiumRating.addEventListener('submit', (event) => {
     event.preventDefault()
     const newRating = event.target.rating.value
     const newComment = event.target.comment.value
-    console.log(newComment)
-    console.log(userLogin)
+    // console.log(newComment)
+    // console.log(userLogin)
     fetch (`http://localhost:3000/reviews/${event.target.dataset.id}`, {
         method: 'PATCH',
         headers: {
@@ -352,3 +352,8 @@ stadiumRating.addEventListener('submit', (event) => {
             console.log(data)
         })
 })
+
+// 
+
+// Delete rating and comments
+
