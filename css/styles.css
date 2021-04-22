@@ -1,6 +1,5 @@
 body {
     
-
     min-height: 0;
     /* display: inline-block; */
     position: relative;
@@ -13,20 +12,6 @@ body {
     padding: 30px;
 
     text-align: center;
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
 
 }
 
@@ -133,33 +118,6 @@ img.detail-image  {
     background-color:rgb(50, 29, 52);
     margin-top: 50px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .transition, p, ul li i:before, ul li i:after {
@@ -330,39 +288,6 @@ ul li i:after {
 ::-webkit-scrollbar-thumb:hover {
   background: orange;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 :root {
     --lightgray: #efefef;
@@ -583,21 +508,6 @@ ul li i:after {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   @import url('https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i');
 html,body{
   margin:0;
@@ -641,7 +551,7 @@ a{
   left:0;
     -webkit-backface-visibility: hidden;
     -webkit-transform: translateZ(0); backface-visibility: hidden;
-  scale(1.0, 1.0);
+  scale:(1.0, 1.0);
     transform: translateZ(0);
   background:#1B2030 url(https://www.aljazeera.com/wp-content/uploads/2020/03/ba7c9e8b4f6d4537aa3c4d4b898c7ed2_8.jpeg?resize=1170%2C780) 50% 0 no-repeat;
   background-size:100%;
@@ -740,12 +650,3 @@ a{
   margin-top:100px
 }.btn.twtr:after{content:"\1F426";padding-left:5px}
 
-
-
-
-
-
-
-
-
-  

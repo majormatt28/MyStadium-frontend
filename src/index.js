@@ -1,11 +1,15 @@
-
+// Global Variables
 const stadiumCollection = document.querySelector("#stadium-collection")
 const formModal = document.querySelector(".modal-content")
 const buttonGroup = document.querySelector(".btn-group")
 let userLogin 
+let getOurRating
+const openEls = document.querySelectorAll("[data-open]");
+const closeEls = document.querySelectorAll("[data-close]");
+const isVisible = "is-visible";
 
 
-
+// Render one Stadium
 function renderOneStadium (stadiumObj) {
    
     const stadiumDiv = document.createElement('div')
@@ -18,13 +22,10 @@ function renderOneStadium (stadiumObj) {
             alt="${stadiumObj.name}" />
         <h2>${stadiumObj.name}</h2>`
        
-       
-       
     stadiumCollection.append(stadiumDiv)
-
 }
 
-
+// Render All Stadiums
 function renderAllStadiums () {
 
     fetch ("http://localhost:3000/stadia")
@@ -40,15 +41,13 @@ function renderAllStadiums () {
 renderAllStadiums()
 
 
+// Eventlistener for stadiums
 stadiumCollection.addEventListener("click", (event) => {
-    
-  
-   
+
     if (event.target.className === "card")  {
    getOneStadium(event.target.dataset.id)
  }
 })
-
 
     function getOneReview (id) {
         fetch (`http://localhost:3000/reviews/${id}`)
@@ -56,9 +55,7 @@ stadiumCollection.addEventListener("click", (event) => {
         .then (data => stadiumInfo(data))
     }
 
-   
-
-    function getOneStadium (id) {
+function getOneStadium (id) {
 
     fetch (`http://localhost:3000/stadia/${id}`)
          .then (response => response.json())
@@ -78,54 +75,26 @@ stadiumCollection.addEventListener("click", (event) => {
     detailH3.textContent = stadiumInfoObj.description
 
     const detailH5 = document.querySelector('h5.comment')
-    detailH5.textContent = stadiumInfoObj.reviews.comments
+    detailH5.textContent = stadiumInfoObj.review
     
-    
+    getOurRating = document.querySelector('h4.rating')
+    getOurRating.innerHTML = stadiumInfoObj.review.rating
 
     stadiumCollection.dataset.id = stadiumInfoObj.id
- }
+}
 
-
- 
-
-
-
-
-
-
+// rendering a user
 function renderOneUser (userObj) {
-   console.log(userLogin)
+//    console.log(userLogin)
     const userDiv = document.createElement('div')
     userDiv.classList.add('card')
     userDiv.dataset.id = userObj.id
 
-    
     userDiv.innerHTML = 
        `<span> User </span>
     <h2>${userObj.username}</h2>`
     
-    
-
 }
-
-
-
-
-// function renderAllUsers () {
-
-//     fetch ("http://localhost:3000/users")
-//         .then (response => response.json())
-//         .then (userArr => {
-//             userArr.forEach (userObject => {
-//                 renderOneUser(userObject)
-//             }) 
-//         })
-
-        
-// }
-
-
-
 
 
 (function() {
@@ -227,15 +196,6 @@ function renderOneUser (userObj) {
   }).call(this);
   
 
-
-
-
-
-
-
-
-
-
   // Some random colors
 const colors = ["#FFFFFF", "#321d34", "#FFD700"];
 
@@ -279,39 +239,7 @@ balls.forEach((el, i, ra) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // dots
-
-
-  const openEls = document.querySelectorAll("[data-open]");
-const closeEls = document.querySelectorAll("[data-close]");
-const isVisible = "is-visible";
 
 for (const el of openEls) {
   el.addEventListener("click", function() {
@@ -339,39 +267,54 @@ document.addEventListener("keyup", e => {
   }
 });
 
-
-
-
+// Login form
 formModal.addEventListener("submit", (event) => {
     event.preventDefault()
     
     if (event.target.matches = ('form#user-login')){
         const userName = formModal.querySelector('input#login-form').value 
-       
         stadiumCollection.dataset.userName = userName
 
+
         fetch (`http://localhost:3000/users`)
-        .then (response => response.json())
-        .then ( userArr => { 
-            userArr.forEach(userObj => {
-           if (userObj.username === userName){
+            .then (response => response.json())
+            .then ( userArr => { 
+                userArr.forEach(userObj => {
+            if (userObj.username === userName){
                userLogin = userObj
-               renderOneUser("")
-           }
-
-
             
-            }) 
-
-            
-            
-           
-            
-           
-            stadiumCollection.style.display = "block"
+               // grabs HMSTRS and changes it to username
+               const userNameTag = document.querySelector('.username')
+               userNameTag.textContent = userLogin.username
+                
+               // removes pop up
+               document.querySelector(".modal.is-visible").classList.remove(isVisible);
+               renderOneUser(userLogin)
+            }
+           else (newUserLogin)
+        }) 
             buttonGroup.style.display = "none"
-            
         })
     }
 })
-// console.log(userLogin)
+
+// New User Login
+
+function newUserLogin () {
+    fetch (`http://localhost:3000/users`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify(userLogin)
+    })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+        })
+       
+}
+
+// Ratings & Comments
+
