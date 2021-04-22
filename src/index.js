@@ -50,9 +50,9 @@ stadiumCollection.addEventListener("click", (event) => {
 })
 
     function getOneReview (id) {
-        fetch (`http://localhost:3000/reviews/${id}`)
-        .then (response => response.json())
-        .then (data => stadiumInfo(data))
+        fetch (`http://localhost:3000/reviews`)
+            .then (response => response.json())
+            .then (data => stadiumInfo(data))
     }
 
 function getOneStadium (id) {
@@ -64,6 +64,7 @@ function getOneStadium (id) {
 
  function stadiumInfo (stadiumInfoObj) {
    
+    console.log(stadiumInfoObj)
     const detailImg = document.querySelector('img.detail-image')
     detailImg.src = stadiumInfoObj.image 
     detailImg.alt = stadiumInfoObj.name 
@@ -75,17 +76,17 @@ function getOneStadium (id) {
     detailH3.textContent = stadiumInfoObj.description
 
     const detailH5 = document.querySelector('h5.comment')
-    detailH5.textContent = stadiumInfoObj.review
+    detailH5.textContent = stadiumInfoObj.reviews[0].comments
     
     getOurRating = document.querySelector('h4.rating')
-    getOurRating.innerHTML = stadiumInfoObj.review.rating
+    getOurRating.textContent = stadiumInfoObj.reviews[0].rating
 
     stadiumCollection.dataset.id = stadiumInfoObj.id
 }
 
 // rendering a user
 function renderOneUser (userObj) {
-//    console.log(userLogin)
+    // console.log(userLogin)
     const userDiv = document.createElement('div')
     userDiv.classList.add('card')
     userDiv.dataset.id = userObj.id
@@ -271,28 +272,35 @@ document.addEventListener("keyup", e => {
 formModal.addEventListener("submit", (event) => {
     event.preventDefault()
     
-    if (event.target.matches = ('form#user-login')){
+    console.log(event.target)
+    if (event.target.matches('form.user-login')){
         const userName = formModal.querySelector('input#login-form').value 
         stadiumCollection.dataset.userName = userName
 
-
+        // console.log("Hello")
         fetch (`http://localhost:3000/users`)
             .then (response => response.json())
             .then ( userArr => { 
-                userArr.forEach(userObj => {
-            if (userObj.username === userName){
-               userLogin = userObj
+                // console.log(userLogin)
+                // userArr.forLoop(userObj => {
+                    for(let i = 0; i < userArr.length; i++){
+                        if (userArr[i].username === userName){
+                            userLogin = userArr[i]
+                            // grabs HMSTRS and changes it to username
+                            const userNameTag = document.querySelector('.username')
+                            userNameTag.textContent = userLogin.username
+                             
+                            // removes pop up
+                            document.querySelector(".modal.is-visible").classList.remove(isVisible);
+                            renderOneUser(userLogin)
+                            break 
+                        }
+                    }
             
-               // grabs HMSTRS and changes it to username
-               const userNameTag = document.querySelector('.username')
-               userNameTag.textContent = userLogin.username
-                
-               // removes pop up
-               document.querySelector(".modal.is-visible").classList.remove(isVisible);
-               renderOneUser(userLogin)
-            }
-           else (newUserLogin)
-        }) 
+                    if (!userLogin) {
+                        newUserLogin(userName)
+                    }
+        // }) 
             buttonGroup.style.display = "none"
         })
     }
@@ -300,21 +308,29 @@ formModal.addEventListener("submit", (event) => {
 
 // New User Login
 
-function newUserLogin () {
+function newUserLogin (newUser) {
+    console.log(userLogin)
     fetch (`http://localhost:3000/users`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json"
         },
-        body: JSON.stringify(userLogin)
+        body: JSON.stringify({username: newUser})
     })
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-        })
        
 }
 
-// Ratings & Comments
 
+// New ratings & comments
+
+function newReview () {
+    fetch ('http://localhost:3000/reviews', {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        },
+        body: JSON.stringify()
+    })
+}
