@@ -2,6 +2,7 @@
 const stadiumCollection = document.querySelector("#stadium-collection")
 const formModal = document.querySelector(".modal-content")
 const buttonGroup = document.querySelector(".btn-group")
+let userLogin 
 
 
 
@@ -93,7 +94,7 @@ stadiumCollection.addEventListener("click", (event) => {
 
 
 function renderOneUser (userObj) {
-   
+   console.log(userLogin)
     const userDiv = document.createElement('div')
     userDiv.classList.add('card')
     userDiv.dataset.id = userObj.id
@@ -346,14 +347,31 @@ formModal.addEventListener("submit", (event) => {
     
     if (event.target.matches = ('form#user-login')){
         const userName = formModal.querySelector('input#login-form').value 
+       
         stadiumCollection.dataset.userName = userName
 
-        fetch (`http://localhost:3000/users/${userName.id}`)
+        fetch (`http://localhost:3000/users`)
         .then (response => response.json())
-        .then ( data => {
+        .then ( userArr => { 
+            userArr.forEach(userObj => {
+           if (userObj.username === userName){
+               userLogin = userObj
+               renderOneUser("")
+           }
+
+
+            
+            }) 
+
+            
+            
+           
+            
+           
             stadiumCollection.style.display = "block"
             buttonGroup.style.display = "none"
             
         })
     }
 })
+// console.log(userLogin)
