@@ -81,7 +81,7 @@ body {
 }
 
 .card img:hover {
-    z-index: 10000;
+    /* z-index: 10000; */
     position: relative;
 }
 
@@ -199,7 +199,7 @@ p {
   opacity: 1;
   transform: translate(0, 0);
   margin-top: 14px;
-  z-index: 2;
+  /* z-index: 2; */
 }
 
 ul {
@@ -353,6 +353,7 @@ ul li i:after {
   .modal.is-visible {
     visibility: visible;
     opacity: 1;
+    z-index: 1000;
   }
   
   .modal-dialog {

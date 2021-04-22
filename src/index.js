@@ -7,6 +7,7 @@ let getOurRating
 const openEls = document.querySelectorAll("[data-open]");
 const closeEls = document.querySelectorAll("[data-close]");
 const isVisible = "is-visible";
+const stadiumRating = document.querySelector("form#stadium-rating")
 
 
 // Render one Stadium
@@ -55,12 +56,11 @@ stadiumCollection.addEventListener("click", (event) => {
             .then (data => stadiumInfo(data))
     }
 
-function getOneStadium (id) {
-
-    fetch (`http://localhost:3000/stadia/${id}`)
-         .then (response => response.json())
-         .then (data => stadiumInfo(data)) 
-     }
+    function getOneStadium (id) {
+        fetch (`http://localhost:3000/stadia/${id}`)
+            .then (response => response.json())
+            .then (data => stadiumInfo(data)) 
+    }
 
  function stadiumInfo (stadiumInfoObj) {
    
@@ -80,6 +80,9 @@ function getOneStadium (id) {
     
     getOurRating = document.querySelector('h4.rating')
     getOurRating.textContent = stadiumInfoObj.reviews[0].rating
+
+    const showUser = document.querySelector('h1.username')
+    showUser.textContent = stadiumInfoObj.users[0].username
 
     stadiumCollection.dataset.id = stadiumInfoObj.id
 }
@@ -309,7 +312,7 @@ formModal.addEventListener("submit", (event) => {
 // New User Login
 
 function newUserLogin (newUser) {
-    console.log(userLogin)
+    // console.log(userLogin)
     fetch (`http://localhost:3000/users`, {
         method: 'POST',
         headers: {
@@ -321,16 +324,23 @@ function newUserLogin (newUser) {
        
 }
 
-
 // New ratings & comments
 
-function newReview () {
-    fetch ('http://localhost:3000/reviews', {
+stadiumRating.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const newRating = event.target.rating.value
+    const newComment = event.target.comment.value
+
+    fetch (`http://localhost:3000/reviews/${event.target.dataset.id}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json"
         },
-        body: JSON.stringify()
+        body: JSON.stringify({rating: newRating, comment: newComment})
     })
-}
+        .then(resp => resp.json())
+        .then(data => {
+
+        })
+})
