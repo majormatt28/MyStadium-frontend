@@ -16,32 +16,86 @@
  -->
 
 
-    <div id='login-page' style='height: 100vh;display: flex; justify-content: center; align-items: center;'>
-        <form class='login-form'>
-            <div class="field">
-                <label class="label">Username</label>
-                <div class="control has-icons-left has-icons-right">
-                    <input class="input"  type="text" placeholder="username" value="">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-user"></i>
-                    </span>
-                    <span class="icon is-small is-right">
-                       <!-- <i class="fas fa-check"></i> -->
-                    </span>
-                </div>
-            </div>
-            <div class="control">
-                <button class="button is-fullwidth is-link">Submit</button>
-            </div>
-        </form>
+ <div class="btn-group">
+    <button type="button" class="open-modal" data-open="modal1">
+      Welcome to MyStadium, click here to log in!
+    </button>
+    
+  </div>
+  
+  <div class="modal" id="modal1" data-animation="slideInOutLeft">
+    <div class="modal-dialog">
+      <header class="modal-header">
+        Enter your username
+        <button class="close-modal" aria-label="close modal" data-close>
+          ✕  
+        </button>
+      </header>
+      <section class="modal-content">
+        <p><form class= "user-login">
+            <label for="login-form">Username:</label>
+            <input type="text" id="login-form" name="login-form"><br><br>
+            <input type="submit" value="Submit">
+          </form></p>
+       
+      </section>
+      
+    </div>
+  </div>
+                       
+                       
+                       
+  <div class="header">
+    <div class="sides">
+     
     </div>
     
+    <div class="info">
+    <h4><a href="#category">HMSTR</a></h4>
+      <h1>MyStadium</h1>
+      <div class="meta">
+       
+      </div>
+    </div>
+  </div>
+  <section class="content">
+
+    <p align="center"><a href="https://www.nba.com/" class="btn" target="_b">NBA.com</a>
+    </p>
+  </section>   
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       
+                        
     
     <!--
     STADIUM PAGE
  -->
     
-    <h1>MyStadium</h1>
+    
 
     
     
@@ -63,12 +117,28 @@
 
 
     <div id="stadium-detail">
+        <h2 class="name">Mystadium name</h2>
         <img class="detail-image" src="https://s-media-cache-ak0.pinimg.com/originals/79/07/bb/7907bb62e5e2d77255b4fe10770fae41.gif" width="350px" height="400px"style="border-style: none" color="#000"/></div>
 
        
-        <h2 class="name">Mystadium name</h2>
         <h3 class="description">MyStadium description</h3>
+        <h4 class="rating"></h4>
+        <h5 class="comment"></h5>
+
       </div>
+
+      
+
+      <form id="stadium-rating" data-id="insert stadium id">
+        <label for="rating">Rating: </label>
+        <input type="text" name="rating" id="rating" value="Insert Rating Here" />
+        <label for="comment">Comment: </label>
+        <textarea name="comment" id="comment">Insert Comment Here</textarea>
+        <input type="submit" value="Update" />
+      </form>
+  
+   
+      
 
 
 </body>

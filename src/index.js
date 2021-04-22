@@ -1,5 +1,9 @@
 
 const stadiumCollection = document.querySelector("#stadium-collection")
+const formModal = document.querySelector(".modal-content")
+const buttonGroup = document.querySelector(".btn-group")
+
+
 
 function renderOneStadium (stadiumObj) {
    
@@ -36,14 +40,24 @@ renderAllStadiums()
 
 
 stadiumCollection.addEventListener("click", (event) => {
-   if (event.target.matches('card')) {
+    
+  
+   
+    if (event.target.className === "card")  {
    getOneStadium(event.target.dataset.id)
  }
- console.log(event.target)
 })
 
 
-     function getOneStadium (id) {
+    function getOneReview (id) {
+        fetch (`http://localhost:3000/reviews/${id}`)
+        .then (response => response.json())
+        .then (data => stadiumInfo(data))
+    }
+
+   
+
+    function getOneStadium (id) {
 
     fetch (`http://localhost:3000/stadia/${id}`)
          .then (response => response.json())
@@ -57,34 +71,41 @@ stadiumCollection.addEventListener("click", (event) => {
     detailImg.alt = stadiumInfoObj.name 
 
     const stadiumName = document.querySelector('h2.name')
-    stadium.textContent = stadiumInfoObj.name
+    stadiumName.textContent = stadiumInfoObj.name
     
     const detailH3 = document.querySelector('h3.description')
     detailH3.textContent = stadiumInfoObj.description
+
+    const detailH5 = document.querySelector('h5.comment')
+    detailH5.textContent = stadiumInfoObj.reviews.comments
+    
+    
 
     stadiumCollection.dataset.id = stadiumInfoObj.id
  }
 
 
+ 
 
 
 
 
 
-// function renderOneUser (userObj) {
+
+function renderOneUser (userObj) {
    
-//     const userDiv = document.createElement('div')
-//     userDiv.classList.add('card')
-//     userDiv.dataset.id = userObj.id
+    const userDiv = document.createElement('div')
+    userDiv.classList.add('card')
+    userDiv.dataset.id = userObj.id
 
     
-//     userDiv.innerHTML = 
-//        `<span> User </span>
-//     <h2>${userObj.username}</h2>`
+    userDiv.innerHTML = 
+       `<span> User </span>
+    <h2>${userObj.username}</h2>`
     
-//     stadiumCollection.append(userDiv)
+    
 
-// }
+}
 
 
 
@@ -204,3 +225,135 @@ stadiumCollection.addEventListener("click", (event) => {
     });
   }).call(this);
   
+
+
+
+
+
+
+
+
+
+
+  // Some random colors
+const colors = ["#FFFFFF", "#321d34", "#FFD700"];
+
+const numBalls = 50;
+const balls = [];
+
+for (let i = 0; i < numBalls; i++) {
+  let ball = document.createElement("div");
+  ball.classList.add("ball");
+  ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+  ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
+  ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
+  ball.style.transform = `scale(${Math.random()})`;
+  ball.style.width = `${Math.random()}em`;
+  ball.style.height = ball.style.width;
+  
+  balls.push(ball);
+  document.body.append(ball);
+}
+
+// Keyframes
+balls.forEach((el, i, ra) => {
+  let to = {
+    x: Math.random() * (i % 2 === 0 ? -11 : 11),
+    y: Math.random() * 12
+  };
+
+  let anim = el.animate(
+    [
+      { transform: "translate(0, 0)" },
+      { transform: `translate(${to.x}rem, ${to.y}rem)` }
+    ],
+    {
+      duration: (Math.random() + 1) * 2000, // random duration
+      direction: "alternate",
+      fill: "both",
+      iterations: Infinity,
+      easing: "ease-in-out"
+    }
+  );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// dots
+
+
+  const openEls = document.querySelectorAll("[data-open]");
+const closeEls = document.querySelectorAll("[data-close]");
+const isVisible = "is-visible";
+
+for (const el of openEls) {
+  el.addEventListener("click", function() {
+    const modalId = this.dataset.open;
+    document.getElementById(modalId).classList.add(isVisible);
+  });
+}
+
+for (const el of closeEls) {
+  el.addEventListener("click", function() {
+    this.parentElement.parentElement.parentElement.classList.remove(isVisible);
+  });
+}
+
+document.addEventListener("click", e => {
+  if (e.target == document.querySelector(".modal.is-visible")) {
+    document.querySelector(".modal.is-visible").classList.remove(isVisible);
+  }
+});
+
+document.addEventListener("keyup", e => {
+  // if we press the ESC
+  if (e.key == "Escape" && document.querySelector(".modal.is-visible")) {
+    document.querySelector(".modal.is-visible").classList.remove(isVisible);
+  }
+});
+
+
+
+
+formModal.addEventListener("submit", (event) => {
+    event.preventDefault()
+    
+    if (event.target.matches = ('form#user-login')){
+        const userName = formModal.querySelector('input#login-form').value 
+        stadiumCollection.dataset.userName = userName
+
+        fetch (`http://localhost:3000/users/${userName.id}`)
+        .then (response => response.json())
+        .then ( data => {
+            stadiumCollection.style.display = "block"
+            buttonGroup.style.display = "none"
+            
+        })
+    }
+})
