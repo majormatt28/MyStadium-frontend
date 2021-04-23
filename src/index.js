@@ -52,11 +52,11 @@ stadiumCollection.addEventListener("click", (event) => {
  }
 })
 
-    function getOneReview (id) {
-        fetch (`http://localhost:3000/reviews`)
-            .then (response => response.json())
-            .then (data => stadiumInfo(data))
-    }
+    // function getOneReview (id) {
+    //     fetch (`http://localhost:3000/reviews`)
+    //         .then (response => response.json())
+    //         .then (data => stadiumInfo(data))
+    // }
 
     function getOneStadium (id) {
         fetch (`http://localhost:3000/stadia/${id}`)
@@ -67,6 +67,8 @@ stadiumCollection.addEventListener("click", (event) => {
  function stadiumInfo (stadiumInfoObj) {
    
     console.log(stadiumInfoObj)
+    const userDiv = document.querySelector("#user-info")
+    userDiv.innerHTML = ""
     const detailImg = document.querySelector('img.detail-image')
     detailImg.src = stadiumInfoObj.image 
     detailImg.alt = stadiumInfoObj.name 
@@ -77,14 +79,55 @@ stadiumCollection.addEventListener("click", (event) => {
     const detailH3 = document.querySelector('h3.description')
     detailH3.textContent = stadiumInfoObj.description
 
-    const detailH5 = document.querySelector('h5.comment')
-    detailH5.textContent = stadiumInfoObj.reviews[0].comments
-    
-    getOurRating = document.querySelector('h4.rating')
-    getOurRating.textContent = stadiumInfoObj.reviews[0].rating
 
-    const showUser = document.querySelector('h1.username')
-    showUser.textContent = stadiumInfoObj.users[0].username
+    stadiumInfoObj.reviews.forEach (r => { 
+      if(r.comments != "" ) {
+
+        const div = document.createElement('div')
+        const h5 = document.createElement('h5')
+        const h4 = document.createElement('h4')
+        const h3 = document.createElement('h3')
+        const h1 = document.createElement('h1')
+        const btn = document.createElement("button")
+        btn.className = r.id
+        btn.textContent = "delete"
+
+        btn.addEventListener("click", () => {
+          fetch (`http://localhost:3000/reviews/${btn.className}`, {
+            method: "DELETE"
+          })
+            .then(resp => resp.json())
+            .then(data => {
+              stadiumInfo(data)
+            })
+
+        })
+        // make a button
+        // make buttons id r.id
+        // make an eventlistner for the button
+        // eventlistner is going to fetch (delete)
+          // when fetching it will be reviews/btn.id
+          // we will call stadiumInfo(data)
+        // append the button last
+
+        h5.textContent = r.comments
+        
+        h1.textContent = "---------------"
+
+        h4.textContent = r.rating
+    
+        h3.textContent = "Anonymous Fan"
+        console.log(div,h3)
+        div.append(h3)
+        div.append(h4)
+        div.append(h5)
+        div.append(btn)
+        div.append(h1)
+        
+        userDiv.append(div)
+      }
+    })
+
 
     stadiumCollection.dataset.id = stadiumInfoObj.id
 
@@ -334,6 +377,8 @@ function newUserLogin (newUser) {
 
 stadiumRating.addEventListener('submit', (event) => {
     event.preventDefault()
+
+    // if (event.target.className === 'update')
     const newRating = event.target.rating.value
     const newComment = event.target.comment.value
     // console.log(newComment)
@@ -344,16 +389,18 @@ stadiumRating.addEventListener('submit', (event) => {
             "Content-Type": "application/json",
             Accept: "application/json"
         },
-        // change stadium to currentStadium.id
+        // change stadium to currentStadium
         body: JSON.stringify({rating: newRating, comment: newComment, user: userLogin.id, stadium: currentStadium}) 
     })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+          getOneStadium(currentStadium)
         })
+  
 })
 
 // 
 
 // Delete rating and comments
 
+// add a button to each review
