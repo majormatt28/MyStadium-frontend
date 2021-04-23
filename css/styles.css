@@ -165,7 +165,7 @@ img.detail-image  {
 }
 }
 
-h1, h2 {
+ h2 {
   color: #fff;
 }
 
@@ -175,6 +175,7 @@ h1 {
   line-height: 42px;
   letter-spacing: 3px;
   font-weight: 100;
+  color:gold;
 }
 
 h2 {
@@ -290,9 +291,9 @@ ul li i:after {
 }
 
 :root {
-    --lightgray: #efefef;
-    --blue: steelblue;
-    --white: #fff;
+    --lightgray: gold;
+    --blue: white;
+    --white: rgb(50, 29, 52);
     --black: rgba(0, 0, 0, 0.8);
     --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
   }
@@ -651,3 +652,62 @@ a{
   margin-top:100px
 }.btn.twtr:after{content:"\1F426";padding-left:5px}
 
+
+div#user-info {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  max-width: 19em;
+  background-color:white;
+  padding: 2em;
+  overflow: clip;
+  box-shadow: var(--theme-gradient-two);
+  margin-left: auto;
+  margin-right: auto; 
+  white-space: normal;
+  border: 8px solid rgb(50, 29, 52);
+  border-radius: 50px;
+}
+
+h3.description {
+  color: white;
+}
+
+input{
+  color:#333;
+  border:2px solid;
+  border-radius:3px;
+  text-decoration:none;
+  display:inline-block;
+  padding:5px 10px;
+  font-weight:600
+}
+
+form#stadium-rating {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  max-width: 19em;
+  background-color:rgb(50, 29, 52);
+  padding: 2em;
+  overflow: clip;
+  box-shadow: var(--theme-gradient-two);
+  margin-left: auto;
+  margin-right: auto; 
+  white-space: normal;
+  border: 4px solid white;
+  border-radius: 50px;
+
+}
+
+label {
+  color: gold;
+}
+
+button.open-modal{
+  color: rgb(50, 29, 52);
+}
