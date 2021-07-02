@@ -1,4 +1,4 @@
-View frontend repo [here](https://github.com/majormatt28/MyStadium-backend)
+View backend repo [here](https://github.com/majormatt28/MyStadium-backend)
 
 # MyStadium-frontend
 
