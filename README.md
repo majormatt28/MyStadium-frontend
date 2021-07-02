@@ -10,6 +10,5 @@ To begin you'll want to clone down both this Frontend repository and the Backend
 
 - In your text editor's terminal run 'open index.html'
 
-# Authors
-- Mathew Newton
-- Shafee Rushdan
+<img width="1267" alt="MyStadium" src="https://user-images.githubusercontent.com/58439248/124312411-41e5cf80-db3d-11eb-940c-05c131451917.png">
+
